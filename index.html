@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08a7a0">
+<meta name="description" content="نَفَسِ نور؛ برنامه مذهبی و معنوی">
+<title>محاسبه...نفس</title>
+<style>
+:root{--bg:#061b1b;--panel:#0b2929;--panel2:#103737;--text:#efffff;--muted:#9cc6c4;--turq:#20d5c9;--turq2:#0ca39e;--gold:#e7c77a;--danger:#ef8e8e;--shadow:0 16px 45px #0007}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Tahoma,"Segoe UI",sans-serif;background:radial-gradient(circle at 50% -10%,#14615d 0,#061b1b 45%,#041111 100%);color:var(--text)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(30deg,#fff 1px,transparent 1px),linear-gradient(150deg,#fff 1px,transparent 1px);background-size:44px 44px}
+button,input{font:inherit}button{cursor:pointer;border:0}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:86px}
+.topbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:13px 16px;background:#061b1bdd;backdrop-filter:blur(18px);border-bottom:1px solid #2bd3c833}
+.brand{display:flex;gap:10px;align-items:center}.brand-icon{width:42px;height:42px;display:grid;place-items:center;border:1px solid #2bd3c866;border-radius:14px;background:#0b3938;color:var(--gold);font-size:23px;box-shadow:0 0 22px #19cfc933}.brand b{display:block;font-size:17px}.brand small{color:var(--muted);font-size:10px}.icon-btn,.back{background:#103b3a;color:var(--text);width:42px;height:42px;border-radius:13px;border:1px solid #2bd3c833}
+main{padding:15px}.screen{display:none;animation:in .28s ease}.screen.active{display:block}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{position:relative;overflow:hidden;padding:25px 21px;border-radius:26px;border:1px solid #2bd3c84d;background:linear-gradient(145deg,#104f4b,#092525 65%);box-shadow:var(--shadow);margin-bottom:16px}.hero:after{content:"☾";position:absolute;left:-8px;bottom:-28px;font-size:130px;color:#36d8ce0d}.eyebrow{color:var(--gold);font-size:12px}.hero h1{font-size:25px;line-height:1.5;margin:9px 0}.hero p{color:var(--muted);line-height:1.9;margin:0;font-size:13px}.hero-mark{position:absolute;left:20px;top:20px;color:var(--gold);font-size:42px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.card{min-height:126px;text-align:right;padding:17px;border-radius:20px;background:linear-gradient(160deg,#103635,#0a2424);border:1px solid #2bd3c82e;color:var(--text);box-shadow:0 10px 30px #0004;transition:.2s}.card:active{transform:scale(.97)}.card span{display:block;color:var(--turq);font-size:25px;margin-bottom:15px}.card b{display:block}.card small{display:block;color:var(--muted);margin-top:5px;font-size:10px;line-height:1.7}
+.section-head{display:flex;align-items:center;gap:11px;margin:3px 0 15px}.section-head h2{margin:0;font-size:21px}.section-head p{margin:4px 0 0;color:var(--muted);font-size:11px}.section-head>div:last-child{flex:1}
+.window{background:linear-gradient(160deg,#103534,#092323);border:1px solid #2bd3c83b;border-radius:23px;padding:17px;box-shadow:var(--shadow);margin-bottom:12px}.window h3{margin:0 0 9px;color:var(--gold)}.window p{color:#d1e8e6;line-height:2;font-size:13px;margin:7px 0}.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:#20d5c916;color:var(--turq);font-size:10px;border:1px solid #20d5c933}
+.quran-text{font-family:serif;font-size:24px;line-height:2.25;text-align:center;color:#f8edc8;padding:16px 4px}.actions{display:flex;gap:8px}.btn{flex:1;padding:12px;border-radius:13px;background:#153f3e;color:var(--text);border:1px solid #2bd3c83b}.primary{background:linear-gradient(135deg,var(--turq),var(--turq2));color:#032221;font-weight:bold}.wide{width:100%;margin-top:10px}.progress{height:7px;background:#173938;border-radius:99px;overflow:hidden;margin:13px 0}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--turq),var(--gold));width:0}
+.list{display:grid;gap:10px}.quote{padding:16px;border-radius:19px;background:#0d2d2c;border:1px solid #2bd3c82b}.quote .arabic{font-size:20px;line-height:2;color:#f4e5b7}.quote p{color:var(--muted);font-size:11px;line-height:1.9}.quote small{color:#68b8b3}
+.chat{display:grid;gap:9px;max-height:55vh;overflow:auto;padding:3px}.msg{padding:12px 14px;border-radius:17px;line-height:1.9;font-size:13px;max-width:88%}.bot{background:#103a38;border:1px solid #2bd3c82b}.me{background:#0e817b;justify-self:start;color:#fff}.suggestions{display:flex;gap:7px;overflow:auto;padding:10px 0}.suggestions button{white-space:nowrap;background:#123b3a;color:#cceeed;border:1px solid #2bd3c833;border-radius:99px;padding:8px 11px;font-size:10px}.chatbox{display:flex;gap:7px}.chatbox input{min-width:0;flex:1;background:#081f1f;color:#fff;border:1px solid #2bd3c844;border-radius:14px;padding:12px;outline:none}.chatbox button{background:var(--turq);border-radius:14px;padding:0 15px}.notice{font-size:10px;color:#83aaa8;line-height:1.8}
+.score-card{display:flex;align-items:center;gap:14px;padding:17px;border-radius:22px;background:linear-gradient(135deg,#12504c,#0b2929);border:1px solid #2bd3c84d}.score{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;border:5px solid var(--turq);color:var(--gold);font-size:19px;font-weight:bold}.score-card small{display:block;color:var(--muted);line-height:1.7;margin-top:4px;font-size:10px}.deeds{display:grid;gap:8px;margin-top:12px}.deed{display:flex;align-items:center;gap:10px;padding:13px;border-radius:15px;background:#0d2c2c}.deed input{accent-color:var(--turq);width:19px;height:19px}.success{color:#7be3c4;text-align:center;padding:10px;font-size:12px}
+.bottom{position:fixed;z-index:30;bottom:10px;left:50%;transform:translateX(-50%);width:min(720px,calc(100% - 18px));display:grid;grid-template-columns:repeat(4,1fr);padding:6px;border-radius:20px;background:#061b1bf2;border:1px solid #2bd3c844;backdrop-filter:blur(18px);box-shadow:var(--shadow)}.bottom button{background:transparent;color:#7eaaa8;padding:7px;border-radius:14px}.bottom button.active{background:#10403e;color:var(--turq)}.bottom small{display:block;font-size:9px;margin-top:3px}
+.toast{position:fixed;z-index:99;bottom:92px;left:50%;transform:translateX(-50%);background:#123c3a;color:#fff;border:1px solid #2bd3c855;border-radius:14px;padding:11px 16px;display:none;box-shadow:var(--shadow);font-size:12px}
+.modal{position:fixed;z-index:80;inset:0;background:#0009;display:none;align-items:flex-end;justify-content:center;padding:12px}.modal.show{display:flex}.modalbox{width:min(720px,100%);max-height:85vh;overflow:auto;background:#0a2424;border:1px solid #2bd3c855;border-radius:25px 25px 15px 15px;padding:19px;box-shadow:var(--shadow)}.modalbox h3{color:var(--gold);margin-top:0}.close{float:left;background:#123b3a;color:#fff;border-radius:10px;padding:7px 11px}
+.light{--bg:#edfafa;--panel:#fff;--panel2:#effafa;--text:#07302f;--muted:#527a78}.light body{background:#edfafa}
+@media(max-width:430px){.grid{gap:8px}.card{min-height:118px;padding:14px}.hero h1{font-size:22px}.quran-text{font-size:21px}}
+</style>
+
+<style>
+.dua-card .arabic{
+  font-family: Tahoma, "Noto Naskh Arabic", serif;
+  font-size:1.22rem;
+  line-height:2.35;
+  text-align:right;
+  padding:16px;
+  border-radius:18px;
+  background:rgba(24,184,196,.08);
+  margin:12px 0;
+}
+.dua-card .primary{margin-top:8px}
+#imamReminder{border-color:#d9ad4255;background:linear-gradient(145deg,#143d37,#0a2624)}
+</style>
+
+
+<style>
+.nn-lock-overlay{
+  position:fixed; inset:0; z-index:99999; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.82); backdrop-filter:blur(10px); padding:20px;
+}
+.nn-lock-box,.nn-settings-box{
+  width:min(430px,100%); box-sizing:border-box; background:#101c20; color:#fff;
+  border:1px solid rgba(24,184,196,.45); border-radius:24px; padding:26px;
+  box-shadow:0 20px 70px rgba(0,0,0,.55); text-align:center;
+}
+.nn-lock-icon{font-size:48px;margin-bottom:8px}
+.nn-lock-input{
+  width:100%; box-sizing:border-box; margin:9px 0; padding:14px 15px; border-radius:14px;
+  border:1px solid rgba(255,255,255,.16); background:#071013; color:#fff; outline:none; font-size:16px;
+}
+.nn-lock-input:focus{border-color:#18b8c4}
+.nn-lock-btn,.nn-secondary-btn,.nn-danger-btn,.nn-lock-cancel{
+  width:100%; border:0; border-radius:14px; padding:13px; margin-top:9px; cursor:pointer; font-size:15px;
+}
+.nn-lock-btn{background:#18b8c4;color:#041013;font-weight:700}
+.nn-secondary-btn{background:#d9ad42;color:#171106}
+.nn-danger-btn{background:#642b35;color:#fff}
+.nn-lock-cancel{background:transparent;color:#bbb}
+.nn-lock-error{min-height:22px;color:#ff8e8e;font-size:14px}
+.nn-settings-panel{
+  position:fixed; inset:0; z-index:99998; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.78); padding:20px;
+}
+.nn-settings-close{
+  position:absolute; margin-left:350px; margin-top:-15px; width:38px; height:38px; border-radius:50%;
+  border:0; background:#25363a; color:#fff; font-size:25px; cursor:pointer;
+}
+.nn-settings-box{position:relative}
+.nn-security-note{font-size:11px;line-height:1.8;color:#aebcc0;margin-top:16px}
+.nn-settings-floating{
+  position:fixed; z-index:9990; right:14px; bottom:14px; width:52px; height:52px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.2); background:#101c20; color:#fff; font-size:23px;
+  box-shadow:0 8px 30px rgba(0,0,0,.35); cursor:pointer;
+}
+</style>
+
+
+<style>
+.nn-ai-chat-card{margin:18px 0;padding:20px;border-radius:22px;background:rgba(24,184,196,.08);border:1px solid rgba(24,184,196,.22)}
+.nn-ai-input{width:100%;box-sizing:border-box;border-radius:15px;padding:14px;background:#071013;color:#fff;border:1px solid rgba(255,255,255,.15);font-size:16px;resize:vertical}
+.nn-ai-status{font-size:13px;color:#a9c5c9}
+.nn-ai-answer{margin-top:14px;padding:16px;min-height:70px;border-radius:15px;background:rgba(0,0,0,.22);line-height:2;color:#f2f7f8;white-space:pre-wrap}
+</style>
+
+
+<style>
+.nn-ai-connect-button{
+  display:block;width:calc(100% - 28px);margin:14px auto;padding:14px 18px;
+  border:0;border-radius:16px;background:#18b8c4;color:#061214;
+  font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+.nn-ai-connect-button:active{transform:scale(.98)}
+</style>
+
+</head>
+<body>
+<div class="app">
+<header class="topbar"><div class="brand"><div class="brand-icon">﷽</div><div><b>نَفَسِ نور نسخه ۲</b><small>یاد خدا، قدم به قدم</small></div></div><button class="icon-btn" onclick="toggleTheme()">☾</button></header>
+<main>
+<section id="home" class="screen active">
+<div class="hero"><span class="eyebrow">همراه معنوی و امام‌زمانی</span><h1>هر روز، یک قدم به سوی نور</h1><p>قرآن، کلام امیرالمؤمنین، محاسبه نفس، دعا و راهنمای اعتقادی؛ در یک فضای آرام و فیروزه‌ای.</p><div class="hero-mark">✦</div></div>
+<div class="grid">
+<button class="card" onclick="showScreen('imam')"><span>﷽</span><b>حضرت امیر</b><small>حکمت‌ها و سخنان منتخب</small></button>
+<button class="card" onclick="showScreen('quran')"><span>۞</span><b>قرآن روزانه</b><small>صفحات و آیات منتخب</small></button>
+<button class="card" onclick="showScreen('ai')"><span>✦</span><b>مشاور اعتقادی</b><small>پاسخ‌گوی آفلاین آموزشی</small></button>
+<button class="card" onclick="showScreen('ulama')"><span>☼</span><b>سیره علما</b><small>اخلاق و آموزه‌ها</small></button>
+<button class="card" onclick="showScreen('mohasebe')"><span>✓</span><b>محاسبه نفس</b><small>ثبت اعمال امروز</small></button>
+<button class="card" onclick="showScreen('dua')"><span>♡</span><b>یاد امام زمان(عج)</b><small>دعا، ذکر و انتظار</small></button>
+<button class="card" onclick="showScreen('about')"><span>✦</span><b>سازنده</b><small>امیر ابوالفضل قائمی</small></button>
+</div>
+<div class="window" style="margin-top:12px"><h3>🌙 پنجره امروز</h3><p id="daily">در حال آماده‌سازی...</p><button class="btn primary wide" onclick="openModal('امروز یک قدم کوچک')">شروع برنامه امروز</button></div>
+</section>
+
+<section id="imam" class="screen"><div class="section-head"><button class="back" onclick="goHome()">→</button><div><h2>حضرت امیرالمؤمنین(ع)</h2><p>سخنان منتخب؛ برای متن کامل به منابع معتبر مراجعه شود.</p></div></div><div id="imamList" class="list"></div></section>
+
+<section id="quran" class="screen"><div class="section-head"><button class="back" onclick="goHome()">→</button><div><h2>📖 قرآن کریم</h2><p>متن کامل ۱۱۴ سوره و ۶۲۳۶ آیه</p></div></div>
+<div class="window">
+<div style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><select id="surahSelect" onchange="loadSurah(this.value)" style="flex:1;background:#092424;color:#fff;border:1px solid #2bd3c844;border-radius:13px;padding:12px"></select><button class="btn" onclick="randomSurah()">🎲</button></div>
+<div class="actions"><button class="btn" onclick="prevSurah()">سوره قبل</button><button class="btn primary" onclick="nextSurah()">سوره بعد</button></div>
+<div id="quranStatus" style="color:var(--muted);font-size:11px;text-align:center;padding:12px">در حال آماده‌سازی قرآن...</div>
+</div>
+<div id="surahBox" class="list"></div>
+</section>
+
+<section id="ai" class="screen"><div class="section-head"><button class="back" onclick="goHome()">→</button><div><h2>مشاور معنوی</h2><p>آفلاین + آنلاین؛ مخصوص پرسش‌های اعتقادی و معنوی</p></div></div><div class="window"><span id="offlineStatus" class="tag">🟢 مشاور آفلاین آماده است</span><p>سؤال‌های پرتکرار بدون اینترنت پاسخ داده می‌شوند. اگر کلید API را در تنظیمات خصوصی وارد کرده باشی، برای سؤال‌های جدید مشاور آنلاین هم فعال می‌شود.</p></div><div id="chat" class="chat"></div><div class="suggestions"><button onclick="askSuggestion('چطور توبه کنیم؟')">توبه</button><button onclick="askSuggestion('شک در نماز چه حکمی دارد؟')">شک در نماز</button><button onclick="askSuggestion('چه چیزهایی روزه را باطل می‌کند؟')">مبطلات روزه</button><button onclick="askSuggestion('حق الناس را چگونه جبران کنیم؟')">حق‌الناس</button><button onclick="askSuggestion('وظیفه منتظر امام زمان چیست؟')">انتظار</button><button onclick="askSuggestion('یک آیه برای آرامش معرفی کن')">آیه آرامش</button></div><form class="chatbox" onsubmit="sendQuestion(event)"><input id="aiInput" placeholder="سؤال خود را بنویسید…"><button>ارسال</button></form><p class="notice">پاسخ‌های آفلاین آموزشی‌اند و در احکام شرعی باید نظر مرجع تقلید یا عالم واجد صلاحیت را نیز در نظر گرفت.</p>
+
+<button id="nnAiConnectButton" class="nn-ai-connect-button" onclick="nnOpenSettings()">
+  ⚙️ تنظیمات مشاور و API
+</button>
+<p id="nnSettingsHint" style="text-align:center;font-size:12px;color:#a9c5c9;margin:8px 0 14px">برای اولین ورود، یک رمز تعیین کن؛ سپس کادر API باز می‌شود.</p>
+
+<div class="nn-ai-chat-card">
+  <h3>🤖 مشاور معنوی واقعی</h3>
+  <p class="nn-ai-status" id="nnAiStatus">آماده اتصال</p>
+  <textarea id="nnAiQuestion" class="nn-ai-input" rows="4"
+    placeholder="سؤال معنوی خودت را بنویس..." dir="rtl"></textarea>
+  <button class="nn-lock-btn" onclick="nnAskSpiritualAI()">🤲 دریافت پاسخ</button>
+  <div id="nnAiAnswer" class="nn-ai-answer" dir="rtl">پاسخ مشاور اینجا نمایش داده می‌شود.</div>
+</div>
+</section>
+
+<section id="ulama" class="screen"><div class="section-head"><button class="back" onclick="goHome()">→</button><div><h2>سیره و زندگی علما</h2><p>نمونه‌های کوتاه برای مطالعه</p></div></div><div id="ulamaList" class="list"></div></section>
+
+<section id="mohasebe" class="screen"><div class="section-head"><button class="back" onclick="goHome()">→</button><div><h2>محاسبه نفس</h2><p>خودارزیابی امروز؛ نه معیار قطعی قرب الهی</p></div></div><div class="score-card"><div class="score" id="score">۰٪</div><div><b>امتیاز خودارزیابی</b><small>هدف، بهترشدن و توجه بیشتر به اعمال است؛ نه قضاوت قطعی درباره انسان.</small></div></div><div id="deeds" class="deeds"></div><button class="btn primary wide" onclick="saveDeeds()">ثبت اعمال امروز</button><div id="saveMsg" class="success"></div></section>
+
+<section id="dua" class="screen"><div class="section-head"><button class="back" onclick="goHome()">→</button><div><h2>یاد امام زمان(عج)</h2><p>دعا، زیارت، ذکر و یادآوری انتظار</p></div></div>
+<div id="imamReminder" class="window"><span class="tag">💚 یادآوری انتظار</span><p id="imamMessage" style="font-size:16px;text-align:center;color:var(--gold);line-height:2"></p></div>
+<div class="window"><h3>📖 زیارت آل‌یاسین</h3><p class="notice">متن کامل زیارت آل‌یاسین؛ از زیارات مشهور امام زمان(عج).</p><div class="arabic" dir="rtl">بِسْمِ الله الرَّحْمنِ الرَّحِيمِ<br><br>سَلامٌ عَلى آلِ يس، السَّلامُ عَلَيْكَ يا داعِيَ الله وَرَبَّانِيَّ آياتِهِ، السَّلامُ عَلَيْكَ يا بابَ الله وَدَيَّانَ دِينِهِ، السَّلامُ عَلَيْكَ يا خَلِيفَةَ الله وَناصِرَ حَقِّهِ، السَّلامُ عَلَيْكَ يا حُجَّةَ الله وَدَلِيلَ إِرادَتِهِ، السَّلامُ عَلَيْكَ يا تالِيَ كِتابِ الله وَتَرْجُمانَهُ، السَّلامُ عَلَيْكَ فِي آناءِ لَيْلِكَ وَأَطْرافِ نَهارِكَ، السَّلامُ عَلَيْكَ يا بَقِيَّةَ الله فِي أَرْضِهِ، السَّلامُ عَلَيْكَ يا مِيثاقَ الله الَّذِي أَخَذَهُ وَوَكَّدَهُ، السَّلامُ عَلَيْكَ يا وَعْدَ الله الَّذِي ضَمِنَهُ، السَّلامُ عَلَيْكَ أَيُّهَا العَلَمُ المَنْصُوبُ وَالعِلْمُ المَصْبُوبُ وَالغَوْثُ وَالرَّحْمَةُ الواسِعَةُ وَعْداً غَيْرَ مَكْذُوبٍ،<br><br>السَّلامُ عَلَيْكَ حِينَ تَقُومُ، السَّلامُ عَلَيْكَ حِينَ تَقْعُدُ، السَّلامُ عَلَيْكَ حِينَ تَقْرَأُ وَتُبَيِّنُ، السَّلامُ عَلَيْكَ حِينَ تُصَلِّي وَتَقْنُتُ، السَّلامُ عَلَيْكَ حِينَ تَرْكَعُ وَتَسْجُدُ، السَّلامُ عَلَيْكَ حِينَ تُهَلِّلُ وَتُكَبِّرُ، السَّلامُ عَلَيْكَ حِينَ تَحْمَدُ وَتَسْتَغْفِرُ، السَّلامُ عَلَيْكَ حِينَ تُصْبِحُ وَتُمْسِي، السَّلامُ عَلَيْكَ فِي اللَّيْلِ إِذا يَغْشى وَالنَّهارِ إِذا تَجَلّى، السَّلامُ عَلَيْكَ أَيُّهَا الإمامُ المَأْمُونُ، السَّلامُ عَلَيْكَ أَيُّهَا المُقَدَّمُ المَأْمُولُ، السَّلامُ عَلَيْكَ بِجَوامِعِ السَّلامِ. أُشْهِدُكَ يا مَوْلايَ أَنِّي أَشْهَدُ أَنْ لا إِلهَ إِلاّ الله وَحْدَهُ لا شَرِيكَ لَهُ وَأَنَّ مُحَمَّداً عَبْدُهُ وَرَسُولُهُ لا حَبِيبَ إِلاّ هُوَ وَأَهْلُهُ،<br><br>وَأُشْهِدُكَ يا مَوْلايَ أَنَّ عَلِيّاً أَمِيرَ المُؤْمِنِينَ حُجَّتُهُ، وَالحَسَنَ حُجَّتُهُ، وَالحُسَيْنَ حُجَّتُهُ، وَعَلِيَّ بْنَ الحُسَيْنِ حُجَّتُهُ، وَمُحَمَّدَ بْنَ عَلِيٍّ حُجَّتُهُ، وَجَعْفَرَ بْنَ مُحَمَّدٍ حُجَّتُهُ، وَمُوسى بْنَ جَعْفَرٍ حُجَّتُهُ، وَعَلِيَّ بْنَ مُوسى حُجَّتُهُ، وَمُحَمَّدَ بْنَ عَلِيٍّ حُجَّتُهُ، وَعَلِيِّ بْنَ مُحَمَّدٍ حُجَّتُهُ، وَالحَسَنَ بْنَ عَلِيٍّ حُجَّتُهُ،<br><br>وَأَشْهَدُ أَنَّكَ حُجَّةُ الله أَنْتُمْ الأوَّلُ وَالآخِرُ، وَأَنَّ رَجْعَتَكُمْ حَقٌّ لا رَيْبَ فِيها، يَوْمَ لا يَنْفَعُ نَفْساً إِيمانُها لَمْ تَكُنْ آمَنَتْ مِنْ قَبْلُ أَوْ كَسَبَتْ فِي إِيمانِها خَيْراً، وَأَنَّ المَوْتَ حَقٌّ وَأَنَّ ناكِراً وَنَكِيراً حَقٌّ، وَأَشْهَدُ أَنَّ النَّشْرَ حَقٌّ وَالبَعْثَ حَقٌّ وَأَنَّ الصِّراطَ حَقٌّ وَالمِرْصادَ حَقٌّ وَالمِيزانَ حَقٌّ وَالحَشْرَ حَقٌّ وَالحِسابَ حَقٌّ وَالجَنَّةَ حَقٌّ وَالنَّارَ حَقٌّ وَالوَعْدَ وَالوَعِيدَ بِهِما حَقٌّ. يا مَوْلايَ شَقِيَ مَنْ خالَفَكَ وَسَعِدَ مَنْ أَطاعَكَ؛<br><br>فَاشْهَدْ عَلى ما أَشْهَدْتُكَ عَلَيْهِ وَأَنا وَلِيٌّ لَكَ بَرِيءٌ مِنْ عَدُوِّكَ، فَالحَقُّ ما رَضِيتُمُوهُ وَالباطِلُ ما أَسْخَطْتُمُوهُ وَالمَعْرُوفُ ما أَمَرْتُمْ بِهِ وَالمُنْكَرُ ما نَهَيْتُمْ عَنْهُ، فَنَفْسِي مُؤْمِنَةٌ بِالله وَحْدَهُ لا شَرِيكَ لَهُ وَبِرَسُولِهِ وَبِأَمِيرِ المُؤْمِنِينَ وَبِكُمْ يا مَوْلايَ أَوَّلِكُمْ وَآخِرِكُمْ، وَنُصْرَتِي مُعَدَّةٌ لَكُمْ وَمَوَدَّتِي خالِصَةٌ لَكُمْ، آمِينَ آمِينَ.</div><button class="btn primary wide" onclick="copyTextBlock(this)">📋 کپی زیارت</button><p class="notice">منبع متن: Al-Islam.org — متن کامل زیارت آل‌یاسین.</p></div>
+<div class="window"><h3>🤲 دعای فرج — «إلهي عَظُمَ البلاء»</h3><div class="arabic" dir="rtl">إِلَهِي عَظُمَ الْبَلَاءُ، وَبَرِحَ الْخَفَاءُ، وَانْكَشَفَ الْغِطَاءُ، وَانْقَطَعَ الرَّجَاءُ، وَضَاقَتِ الْأَرْضُ، وَمُنِعَتِ السَّمَاءُ، وَأَنْتَ الْمُسْتَعَانُ وَإِلَيْكَ الْمُشْتَكَى، وَعَلَيْكَ الْمُعَوَّلُ فِي الشِّدَّةِ وَالرَّخَاءِ. اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ أُولِي الْأَمْرِ الَّذِينَ فَرَضْتَ عَلَيْنَا طَاعَتَهُمْ، فَعَرَّفْتَنَا بِذَلِكَ مَنْزِلَتَهُمْ، فَفَرِّجْ عَنَّا بِحَقِّهِمْ فَرَجًا عَاجِلًا كَلَمْحِ الْبَصَرِ أَوْ هُوَ أَقْرَبُ. يَا مُحَمَّدُ يَا عَلِيُّ، يَا عَلِيُّ يَا مُحَمَّدُ، اكْفِيَانِي فَإِنَّكُمَا كَافِيَانِ، وَانْصُرَانِي فَإِنَّكُمَا نَاصِرَانِ. يَا مَوْلَانَا يَا صَاحِبَ الزَّمَانِ، الْغَوْثَ الْغَوْثَ، الْأَمَانَ الْأَمَانَ، أَدْرِكْنِي أَدْرِكْنِي، يَا مَوْلَايَ يَا صَاحِبَ الزَّمَانِ.</div><button class="btn primary wide" onclick="copyTextBlock(this)">📋 کپی دعا</button><p class="notice">منبع: Al-Islam.org — دعای فرج «إلهي عظم البلاء».</p></div>
+<div class="window"><h3>🌿 دعای سلامتی امام زمان(عج)</h3><div class="arabic" dir="rtl">اللَّهُمَّ كُنْ لِوَلِيِّكَ الْحُجَّةِ بْنِ الْحَسَنِ، صَلَوَاتُكَ عَلَيْهِ وَعَلَى آبَائِهِ، فِي هَذِهِ السَّاعَةِ وَفِي كُلِّ سَاعَةٍ، وَلِيًّا وَحَافِظًا، وَقَائِدًا وَنَاصِرًا، وَدَلِيلًا وَعَيْنًا، حَتَّى تُسْكِنَهُ أَرْضَكَ طَوْعًا، وَتُمَتِّعَهُ فِيهَا طَوِيلًا.</div><button class="btn primary wide" onclick="copyTextBlock(this)">📋 کپی دعا</button></div>
+<div class="window"><h3>📿 ذکر فرج</h3><p id="zekr" style="font-size:22px;text-align:center;color:var(--gold)">اللهم عجل لولیک الفرج</p><button class="btn primary wide" onclick="countZikr()">ذکر گفتم — <span id="zikrCount">۰</span> بار</button></div>
+<div class="window"><h3>✨ اعمال کوچک برای انتظار</h3><p>هر روز یکی را انتخاب کن: نماز با حضور قلب، صلوات، صدقه، ترک یک گناه، دعا برای فرج، یا کمک به یک نفر.</p></div></section>
+
+<section id="about" class="screen"><div class="section-head"><button class="back" onclick="goHome()">→</button><div><h2>درباره نَفَسِ نور</h2><p>یک پروژه مذهبی با رویکرد آموزشی</p></div></div><div class="window"><div style="font-size:45px;text-align:center;color:var(--gold)">﷽</div><h3 style="text-align:center">امیر ابوالفضل قائمی</h3><p>این پروژه با هدف فراهم‌کردن مجموعه‌ای کاربردی از قرآن، معارف، خودارزیابی و محتوای معنوی ساخته شده است.</p><p>نسخه فعلی برای اجرا روی موبایل طراحی شده و بسیاری از اطلاعات آن در خود دستگاه نگهداری می‌شود.</p></div></section>
+</main>
+<nav class="bottom"><button onclick="showScreen('home')">⌂<small>خانه</small></button><button onclick="showScreen('quran')">۞<small>قرآن</small></button><button onclick="showScreen('mohasebe')">✓<small>محاسبه نفس</small></button><button onclick="showScreen('dua')">♡<small>انتظار</small></button></nav>
+</div><div id="toast" class="toast"></div><div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div class="modalbox"><button class="close" onclick="closeModal()">بستن</button><h3 id="modalTitle"></h3><p id="modalText" style="line-height:2;color:var(--muted)"></p></div></div>
+
+<script>
+const imam=[
+["حکمت ۳۱","دل‌ها مانند بدن‌ها خسته می‌شوند؛ برای آن‌ها سخنان حکمت‌آمیز بجویید.","نهج‌البلاغه، حکمت ۹۱ در برخی شماره‌گذاری‌ها؛ برای ارجاع چاپی دقیق بررسی شود."],
+["حکمت ۳۸۷","قناعت مالی است که پایان نمی‌پذیرد.","نهج‌البلاغه، حکمت ۵۷؛ شماره‌گذاری در چاپ‌ها متفاوت است."],
+["حکمت ۸۱","ارزش هر انسان به اندازه چیزی است که نیکو انجام می‌دهد.","نهج‌البلاغه؛ حکمت مشهور منسوب به امام علی(ع)، با تطبیق ترجمه معتبر."],
+["حکمت","دانش بهتر از مال است؛ دانش از انسان نگهبانی می‌کند، در حالی که انسان از مال نگهبانی می‌کند.","نهج‌البلاغه، حکمت ۱۴۷ در برخی چاپ‌ها."],
+["حکمت","کسی که قدر خود را بشناسد، خویشتن را تباه نمی‌کند.","نهج‌البلاغه، از حکمت‌های اخلاقی منسوب به امام علی(ع)."],
+["حکمت","بردباری پرده‌ای پوشاننده و عقل شمشیری برنده است.","نهج‌البلاغه، بخش حکمت‌ها."],
+["حکمت","خشم نوعی دیوانگی است که آغازش پشیمانی و پایانش ندامت است.","نهج‌البلاغه، بخش حکمت‌ها."],
+["حکمت","با مردم چنان معاشرت کنید که اگر مُردید بر شما بگریند و اگر زنده ماندید مشتاق دیدارتان باشند.","نهج‌البلاغه، حکمت ۱۰."],
+["حکمت","دوست، دوست نیست مگر آنکه برادرش را در سه هنگام حفظ کند: در گرفتاری، در غیبت و پس از مرگ.","نهج‌البلاغه، بخش حکمت‌ها."],
+["حکمت","زبان، درنده‌ای است که اگر رهایش کنند می‌گزد.","نهج‌البلاغه، بخش حکمت‌ها."],
+["حکمت","فرصت مانند ابر می‌گذرد؛ پس فرصت‌های نیک را غنیمت شمارید.","نهج‌البلاغه، از حکمت‌های اخلاقی."],
+["حکمت","کسی که در کارها شتاب کند، به لغزش نزدیک‌تر است.","نهج‌البلاغه، مضمون حکمت‌های اخلاقی."],
+["حکمت","ارزش هر سخن به صدق آن و ارزش هر عمل به نیت آن است.","مضمون اخلاقی منسوب به امام علی(ع)؛ برای نقل پژوهشی نیازمند تطبیق منبع."],
+["حکمت","نماز وسیله نزدیک شدن هر پرهیزکار به خداست.","نهج‌البلاغه، از کلمات قصار."],
+["حکمت","تقوا رئیس اخلاق و سرچشمه اصلاح رفتار است.","نهج‌البلاغه، مضمون خطبه‌ها و حکمت‌ها."],
+["حکمت","کم‌گویی و اندیشیدن پیش از سخن، انسان را از بسیاری لغزش‌ها حفظ می‌کند.","نهج‌البلاغه، مضمون حکمت‌های اخلاقی."],
+["نامه ۳۱","فرزندم، قلب جوان همچون زمین آماده است؛ هرچه در آن افکنده شود می‌پذیرد.","نهج‌البلاغه، نامه ۳۱؛ وصیت امیرالمؤمنین(ع) به امام حسن(ع)."],
+["نامه ۵۳","با مردم چنان رفتار کن که دوست داری خدا با تو رفتار کند؛ و در برابر مردم انصاف را رعایت کن.","نهج‌البلاغه، نامه ۵۳؛ عهدنامه مالک اشتر."],
+["نامه ۴۷","شما را به تقوای الهی و نظم در کارها و اصلاح میان مردم سفارش می‌کنم.","نهج‌البلاغه، نامه ۴۷؛ وصیت امام علی(ع)."],
+["نامه ۴۵","دنیا برای من از برگ جویده‌ای در دهان ملخ بی‌ارزش‌تر است، اگر بخواهم از حق فاصله بگیرم.","نهج‌البلاغه، نامه ۴۵؛ نامه به عثمان بن حنیف."],
+["نامه ۲۸","نسبت به خدا و مردم، حق را بشناس و از هواپرستی دوری کن.","نهج‌البلاغه، نامه ۲۸؛ با رعایت تفاوت ترجمه‌های چاپی."],
+["سیره و اخلاق","در حکومت و زندگی، عدالت، رعایت حق مردم، توجه به محرومان و مبارزه با ظلم از محورهای برجسته سخنان امام علی(ع) است.","نهج‌البلاغه؛ خطبه‌ها، نامه‌ها و حکمت‌ها."],
+["منبع پیشنهادی","برای مطالعه گسترده‌تر: نهج‌البلاغه با متن عربی، ترجمه معتبر و ارجاع شماره خطبه/نامه/حکمت.","نهج‌البلاغه؛ برای نقل دقیق هر عبارت، تطبیق متن عربی با چاپ مورد استفاده ضروری است."]
+];
+const ulama=[
+["شیخ مفید","محمد بن محمد بن نعمان، از بزرگ‌ترین عالمان امامیه در بغداد و از چهره‌های اثرگذار در کلام و فقه شیعه بود."],
+["شیخ طوسی","محمد بن حسن طوسی، معروف به شیخ الطائفه، از دانشمندان بزرگ امامیه و مؤلف آثاری مانند تهذیب الأحکام و الاستبصار است."],
+["سید مرتضی علم‌الهدی","علی بن حسین موسوی، متکلم و فقیه برجسته امامیه و از استادان اثرگذار حوزه علمی بغداد بود."],
+["سید رضی","محمد بن حسین موسوی، گردآورنده نهج‌البلاغه و از عالمان و ادیبان برجسته قرن چهارم هجری بود."],
+["علامه حلی","حسن بن یوسف حلی، فقیه و متکلم بزرگ امامیه بود و آثار فراوانی در فقه، کلام و اصول از او باقی مانده است."],
+["محقق حلی","جعفر بن حسن حلی، فقیه برجسته امامیه و صاحب شرایع الاسلام، از آثار مهم فقهی شیعه."],
+["شهید اول","محمد بن مکی عاملی، فقیه بزرگ شیعه و صاحب کتاب اللمعة الدمشقیة؛ از چهره‌های برجسته فقه امامیه."],
+["شهید ثانی","زین‌الدین بن علی عاملی، فقیه و دانشمند امامیه و شارح آثار مهم فقهی بود."],
+["ملا احمد نراقی","فقیه و عالم بزرگ دوره قاجار و صاحب آثار فقهی و اخلاقی؛ از چهره‌های اثرگذار حوزه علمی آن دوره."],
+["شیخ مرتضی انصاری","از بزرگ‌ترین فقیهان شیعه و صاحب مکاسب و رسائل؛ روش اصولی او بر حوزه‌های بعدی اثر زیادی گذاشت."],
+["محدث قمی","عباس قمی، محدث و نویسنده آثار اخلاقی و روایی، مشهور به اخلاص، ساده‌زیستی و اهتمام به دعا و حدیث."],
+["علامه طباطبایی","سید محمدحسین طباطبایی، مفسر و فیلسوف معاصر و صاحب تفسیر المیزان؛ زندگی علمی او با قرآن و معارف اسلامی پیوند داشت."],
+["شهید مطهری","مرتضی مطهری، متفکر و استاد حوزه و دانشگاه که در تبیین معارف اسلامی برای نسل جدید آثار فراوانی پدید آورد."],
+["امام خمینی","روح‌الله خمینی، فقیه و عالم شیعه و بنیان‌گذار جمهوری اسلامی ایران؛ آثار او در فقه، اخلاق، عرفان و سیاست دینی گسترده است."],
+["آیت‌الله بهجت","محمدتقی بهجت، فقیه و عارف معاصر؛ در سخنان و سیره او بر تقوا، نماز، مراقبت نفس و ترک گناه تأکید فراوان دیده می‌شود."],
+["سیره مشترک علما","در زندگی بسیاری از عالمان برجسته، علم‌آموزی، عبادت، ساده‌زیستی، مراقبت از زبان، خدمت به مردم و توجه به اخلاق جایگاه مهمی داشته است."],
+["درس امروز","از سیره علما می‌توان یک اصل عملی گرفت: هر روز مقدار کمی مطالعه، عبادت با توجه، محاسبه نفس و یک خدمت واقعی به دیگران را پیگیری کنیم."]
+];
+const quran=["الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ","الرَّحْمَٰنِ الرَّحِيمِ","مَالِكِ يَوْمِ الدِّينِ","إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ"];
+const deeds=["نمازهایم را با توجه بیشتری خواندم","به پدر و مادر یا خانواده احترام گذاشتم","از غیبت و بدگویی دوری کردم","امروز قرآن یا ذکر خواندم","به کسی کمک کردم","برای ظهور و فرج امام زمان(عج) دعا کردم"];
+const answers={
+"امام زمان":["در باور شیعه دوازده‌امامی، حضرت مهدی(عج) امام دوازدهم و حجت خداست. درباره تاریخ ولادت، غیبت و نشانه‌های ظهور بهتر است از منابع معتبر شیعه استفاده شود."],
+"نماز":["نماز عبادتی بنیادین در اسلام است و برای یاد خدا، بندگی و تربیت معنوی اهمیت ویژه‌ای دارد. اگر سؤال شما درباره حکم دقیق یک مورد است، فتوای مرجع تقلید خود را بررسی کنید."],
+"شک در نماز":["احکام شک در نماز بسته به نوع شک و محل آن متفاوت است؛ بعضی شک‌ها نماز را باطل می‌کنند و برخی با نماز احتیاط یا سجده سهو جبران می‌شوند. برای حکم دقیق، مرجع تقلید خود را مشخص کنید."],
+"نماز مسافر":["نماز مسافر در شرایط شرعی معمولاً شکسته خوانده می‌شود، اما جزئیات سفر، قصد اقامت و شرایط محل اهمیت دارد. حکم دقیق را از رساله مرجع تقلید خود بگیر."],
+"وضو":["وضو برای برخی عبادت‌ها مانند نماز لازم است. خواب، خروج ادرار و مدفوع و برخی موارد دیگر از مبطلات وضو هستند؛ جزئیات فقهی را از مرجع تقلید خود بررسی کن."],
+"تیمم":["تیمم در شرایطی مانند نبودن یا ضرر داشتن آب و با رعایت شرایط شرعی می‌تواند جای وضو یا غسل را بگیرد. کیفیت و موارد آن طبق فتوای مرجع تقلید بررسی شود."],
+"روزه":["روزه ماه رمضان عبادتی واجب است و خوردن و آشامیدن عمدی و برخی کارهای دیگر می‌تواند آن را باطل کند. احکام دقیق مبطلات و کفاره بین موارد مختلف متفاوت است."],
+"مبطلات روزه":["مبطلات روزه موارد مشخصی دارند و بعضی از آن‌ها با عمد، فراموشی یا شرایط خاص حکم متفاوتی پیدا می‌کنند. برای حکم دقیق، رساله مرجع تقلیدت را ببین."],
+"روزه قضا":["روزه قضا برای روزه‌های فوت‌شده با شرایط شرعی انجام می‌شود. زمان و کفاره آن به علت ترک روزه بستگی دارد و باید طبق فتوای مرجع تقلید بررسی شود."],
+"نماز آیات":["نماز آیات در برخی حوادث خاص مانند کسوف، خسوف و زلزله با شرایط فقهی واجب می‌شود. کیفیت خواندن آن را می‌توان از رساله مرجع تقلید یاد گرفت."],
+"خمس":["خمس یک واجب مالی در فقه شیعه است که موارد و محاسبه آن شرایط مشخصی دارد. برای محاسبه دقیق، نظر مرجع تقلید خود را ملاک قرار بده."],
+"زکات":["زکات از واجبات مالی اسلام است و موارد و نصاب‌های مشخصی دارد. همه دارایی‌ها مشمول زکات نیستند و حکم دقیق به مورد بستگی دارد."],
+"غیبت":["غیبت یعنی عیب یا ویژگی ناخوشایند فردی را در غیاب او به‌گونه‌ای بیان کنیم که اگر بشنود ناراحت شود؛ حتی اگر آن عیب واقعاً در او باشد. موارد استثنا احکام خاص خود را دارند."],
+"تهمت":["نسبت دادن عیب یا گناهی که فرد انجام نداده، تهمت است و از گناهان اخلاقی مهم به شمار می‌آید. اگر حقی ضایع شده، جبران حق‌الناس نیز باید جدی گرفته شود."],
+"دروغ":["دروغ گفتن در اصل حرام است و موارد استثنای فقهی شرایط خاصی دارند. برای توجیه دروغ‌های روزمره نباید به استثناها استناد کرد."],
+"حق الناس":["حق‌الناس فقط با پشیمانی قلبی تمام نمی‌شود؛ تا جای ممکن باید حق صاحب آن جبران یا رضایت او جلب شود. اگر شیوه جبران را نمی‌دانی، از عالم مورد اعتماد کمک بگیر."],
+"توبه":["توبه یعنی بازگشت واقعی به خدا: پشیمانی از گناه، ترک آن، تصمیم جدی برای بازنگشتن و در گناهانی که حق دیگران ضایع شده، جبران حق. ناامید شدن از رحمت خدا راه توبه نیست."],
+"گناه":["اگر انسان گناه کرد، راه بازگشت باز است. توبه، جبران حق‌الناس و تلاش برای ترک زمینه‌های گناه مهم است؛ نباید از رحمت خدا ناامید شد."],
+"وسوسه شیطان":["برای مقابله با وسوسه، موقعیت محرک را ترک کن، ذکر خدا بگو، تصمیم را به تأخیر بینداز، مشغول کار سالم شو و اگر مسئله شدید است با فرد قابل اعتماد یا متخصص مشورت کن."],
+"محاسبه نفس":["محاسبه نفس یعنی انسان در پایان روز رفتار و نیت‌هایش را مرور کند، خطاها را بشناسد، شکر نعمت‌ها را به‌جا آورد و برای فردا تصمیم اصلاحی بگیرد."],
+"امامت":["در اعتقاد شیعه، امامت ادامه هدایت الهی پس از پیامبر اکرم(ص) و دارای جایگاه دینی ویژه است. شیعه دوازده امام را به عنوان امامان پس از پیامبر می‌شناسد."],
+"دوازده امام":["شیعه امامیه دوازده امام را می‌شناسد: امام علی(ع)، امام حسن(ع)، امام حسین(ع)، امام سجاد(ع)، امام باقر(ع)، امام صادق(ع)، امام کاظم(ع)، امام رضا(ع)، امام جواد(ع)، امام هادی(ع)، امام حسن عسکری(ع)، امام مهدی(عج)."],
+"غیبت":["غیبت امام مهدی(عج) در باور شیعه به پنهان بودن امام از دسترسی عمومی اشاره دارد. درباره فلسفه و جزئیات آن، منابع اعتقادی معتبر را باید مطالعه کرد."],
+"منتظر":["منتظر واقعی فقط کسی نیست که برای ظهور دعا کند؛ باید در حد توان خود اهل تقوا، عدالت، مسئولیت‌پذیری، کمک به مردم و ترک گناه باشد."],
+"وظیفه منتظر":["از مهم‌ترین کارهای دوران انتظار می‌توان به شناخت امام، پایبندی به دین، اصلاح اخلاق، دعا برای فرج و کمک به جامعه و مردم اشاره کرد."],
+"رجعت":["رجعت در اعتقادات شیعه به بازگشت گروهی از انسان‌های شایسته و بدکار پیش از قیامت، با شرایطی که در روایات مطرح شده، اشاره دارد."],
+"شفاعت":["شفاعت در آموزه‌های اسلامی به اذن و اراده خداوند وابسته است و به معنای بی‌نیازی از ایمان و عمل صالح نیست."],
+"قرآن":["قرآن کتاب آسمانی اسلام است. برای تدبر، می‌توان روزانه چند آیه را با ترجمه و توجه به پیام اخلاقی و اعتقادی آن مطالعه کرد."],
+"آیه آرامش":["یکی از آیات مشهور درباره آرامش: «أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ»؛ آگاه باشید که با یاد خدا دل‌ها آرام می‌گیرد. (رعد: ۲۸)"],
+"صبر":["قرآن بارها مؤمنان را به صبر و پایداری دعوت می‌کند. صبر به معنای بی‌عملی نیست؛ یعنی در سختی‌ها مسیر درست را رها نکنیم."],
+"نهج البلاغه":["نهج‌البلاغه مجموعه‌ای مشهور از خطبه‌ها، نامه‌ها و حکمت‌های منسوب به امام علی(ع) است. برای نقل دقیق، بهتر است متن و شماره حکمت یا نامه همراه منبع بررسی شود."],
+"خدا انسان":["در آموزه‌های اسلامی، آفرینش انسان با عبادت و شناخت خدا، رشد و آزمایش الهی و مسئولیت اخلاقی پیوند دارد."],
+"نماز قضا":["نماز قضا برای نمازهای فوت‌شده با شرایط فقهی مطرح است و تعداد و ترتیب آن می‌تواند اهمیت داشته باشد. حکم دقیق را از مرجع تقلید خود بگیر."],
+"کفاره":["کفاره بسته به نوع تکلیف و علت ترک یا باطل کردن آن متفاوت است. در مورد روزه، کفاره و قضا را نباید بدون بررسی مورد و فتوای مرجع تقلید یکی دانست."],
+"آل یاسین":["زیارت آل‌یاسین از زیارات مشهور امام زمان(عج) است و در بخش «یاد امام زمان» برنامه متن کامل آن قرار داده شده است."],
+"دعای فرج":["در بخش «یاد امام زمان» برنامه، متن کامل دعای فرج و دعای سلامتی امام زمان(عج) قرار گرفته و می‌توانی آن‌ها را کپی کنی."],
+"نماز چرا":["نماز در کنار بندگی خدا، فرصتی روزانه برای یاد خدا، نظم معنوی، توجه به مسئولیت اخلاقی و فاصله گرفتن از غفلت است."],
+"وضو باطل":["از مبطلات مشهور وضو می‌توان به ادرار، مدفوع، خروج باد معده و روده و خواب اشاره کرد؛ جزئیات را مطابق فتوای مرجع تقلیدت بررسی کن."],
+"شک در نماز":["حکم شک در نماز به نوع شک و رکعت بستگی دارد؛ بعضی شک‌ها صحیح، بعضی موجب نماز احتیاط و بعضی مبطل نمازند. مورد دقیق را از رساله مرجع تقلیدت بررسی کن."],
+"نماز مسافر":["نماز مسافر در شرایط فقهی خاص کوتاه می‌شود و حکم آن به مسافت، قصد اقامت و شرایط سفر بستگی دارد؛ برای حکم دقیق مرجع تقلیدت را ملاک قرار بده."],
+"توبه چگونه":["توبه یعنی پشیمانی واقعی، ترک گناه، تصمیم جدی برای بازنگشتن و در صورت تضییع حق دیگران، جبران حق‌الناس. از رحمت خدا ناامید نشو."],
+"کفاره روزه":["کفاره روزه به علت ترک یا باطل کردن روزه و شرایط فرد بستگی دارد. قضا و کفاره یکی نیستند و حکم دقیق باید از مرجع تقلید بررسی شود."],
+"حق الناس چگونه":["برای جبران حق‌الناس باید تا حد امکان حق صاحب حق را برگرداند یا رضایت او را جلب کرد. اگر روش جبران را نمی‌دانی از عالم مورد اعتماد کمک بگیر."],
+"غیبت چیست":["غیبت یعنی عیب یا ویژگی ناخوشایند مؤمن را در غیاب او طوری بیان کنی که اگر بشنود ناراحت شود. غیبت از گناهان مهم اخلاقی است."],
+"چرا شیعه":["شیعه امامیه بر ولایت و امامت دوازده امام پس از پیامبر اکرم(ص) باور دارد و برای این باور به قرآن، سنت و روایات استناد می‌کند. برای مطالعه بیشتر از منابع معتبر استفاده کن."],
+"غیبت امام زمان":["در باور شیعه، امام مهدی(عج) در دوران غیبت از دسترسی عمومی پنهان است. وظیفه مؤمن در این دوران شناخت امام، عمل به دین، اصلاح اخلاق و دعا برای فرج است."],
+"منتظر واقعی":["منتظر واقعی فقط دعا نمی‌کند؛ در حد توان خود تقوا، عدالت، مسئولیت‌پذیری، کمک به مردم و ترک گناه را تمرین می‌کند."],
+"وظیفه دوران غیبت":["شناخت امام زمان(عج)، پایبندی به دین، اصلاح اخلاق، دعا برای فرج، خدمت به مردم و دوری از گناه از کارهای مهم دوران غیبت است."],
+"رجعت چیست":["رجعت در اعتقادات شیعه به بازگشت گروهی از انسان‌های شایسته و بدکار پیش از قیامت، با شرایطی که در روایات آمده، گفته می‌شود."],
+"شفاعت چیست":["شفاعت در آموزه‌های اسلامی به اذن خداوند وابسته است و به معنای بی‌نیازی از ایمان و عمل صالح نیست."],
+"آیه توبه":["از آیات امیدبخش توبه، زمر ۵۳ است: «لَا تَقْنَطُوا مِنْ رَحْمَةِ اللَّهِ»؛ از رحمت خدا ناامید نشوید."],
+"آیه صبر":["در بقره ۱۵۳ می‌خوانیم: «إِنَّ اللَّهَ مَعَ الصَّابِرِينَ»؛ خدا با صابران است."],
+"صلوات":["ذکر صلوات: «اللهم صل علی محمد و آل محمد». می‌توانی آن را با حضور قلب و نیت خیر بگویی."],
+"کنترل خشم":["هنگام خشم مکث کن، از موقعیت فاصله بگیر، چند نفس آرام بکش و تصمیم مهم را به بعد موکول کن. کنترل خشم از فضایل اخلاقی است."],
+"امام علی کیست":["امام علی(ع) نخستین امام شیعیان و از نزدیک‌ترین یاران و خویشان پیامبر اکرم(ص) است. بخش «حضرت امیر» برنامه برای آشنایی با سخنان و سیره ایشان است."],
+"امام حسین کیست":["امام حسین(ع) سومین امام شیعیان و شهید کربلاست؛ قیام ایشان در فرهنگ شیعه نماد ایستادگی در برابر ظلم و وفاداری به حق است."],
+"امام صادق کیست":["امام جعفر صادق(ع) ششمین امام شیعیان است و نقش بزرگی در گسترش معارف و دانش اسلامی داشت."],
+"زمان ظهور":["زمان دقیق ظهور برای ما تعیین نشده و از تعیین وقت قطعی برای ظهور نهی شده است. وظیفه ما آمادگی اخلاقی و دینی و دعا برای فرج است."],
+"دعای ندبه":["دعای ندبه از دعاهای مشهور درباره ولایت، غیبت و انتظار امام زمان(عج) است و معمولاً صبح جمعه خوانده می‌شود."],
+"اخلاق اسلامی":["اخلاق اسلامی یعنی تمرین راستگویی، امانت، صبر، گذشت، کنترل خشم، رعایت حق مردم و مراقبت از نیت و رفتار."],
+"نماز اول وقت":["نماز اول وقت به انسان کمک می‌کند عبادت را به تأخیر نیندازد و نظم معنوی روزانه داشته باشد."],
+"نماز قضا چگونه":["نماز قضا برای نمازهای فوت‌شده با شرایط فقهی مطرح است و تعداد و ترتیب آن اهمیت دارد؛ حکم دقیق را از مرجع تقلیدت بگیر."],
+"تیمم چگونه":["تیمم با شرایط شرعی در مواردی مانند نبودن یا ضرر داشتن آب می‌تواند جای وضو یا غسل را بگیرد؛ کیفیت دقیق را از رساله مرجع تقلید یاد بگیر."],
+"آرامش":["برای آرامش می‌توانی چند دقیقه با توجه و بدون عجله ذکر خدا بگویی، یک آیه با ترجمه بخوانی و مسئله‌ای را که در اختیار تو نیست به خدا واگذار کنی."]
+};
+function fa(n){return n.toString().replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d])}
+function showScreen(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"});document.querySelectorAll(".bottom button").forEach(b=>b.classList.remove("active"));if(["home","quran","mohasebe","dua"].includes(id)){const i={home:0,quran:1,mohasebe:2,dua:3}[id];document.querySelectorAll(".bottom button")[i].classList.add("active")}}
+function goHome(){showScreen("home")}
+function toast(t){const e=document.getElementById("toast");e.textContent=t;e.style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>e.style.display="none",2200)}
+function openModal(t){document.getElementById("modalTitle").textContent=t;document.getElementById("modalText").textContent="امروز فقط یک کار کوچک انتخاب کن: یک آیه بخوان، یک کار خوب انجام بده، از یک خطا دوری کن و لحظه‌ای برای یاد خدا توقف کن.";document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");toast("حالت نمایش تغییر کرد")}
+function render(){document.getElementById("imamList").innerHTML=imam.map(x=>`<article class="quote"><span class="tag">${x[0]}</span><div class="arabic">${x[1]}</div><p>${x[2]}</p></article>`).join("");document.getElementById("ulamaList").innerHTML=ulama.map(x=>`<article class="window"><h3>${x[0]}</h3><p>${x[1]}</p></article>`).join("");document.getElementById("deeds").innerHTML=deeds.map((x,i)=>`<label class="deed"><input type="checkbox" onchange="calcScore()" id="d${i}"><span>${x}</span></label>`).join("");calcScore();quranPage();document.getElementById("daily").textContent=["امروز نیتت را تازه کن و یک کار خیر کوچک انجام بده.","یک آیه با تدبر بخوان و معنایش را مرور کن.","قبل از خواب چند دقیقه اعمال امروزت را مرور کن."][new Date().getDate()%3];document.getElementById("chat").innerHTML='<div class="msg bot">سلام 🌿 من مشاور معنوی نَفَسِ نور هستم. سؤال‌های پرتکرار را بدون اینترنت جواب می‌دهم؛ برای سؤال‌های جدید، در صورت ثبت API به مشاور آنلاین وصل می‌شوم.</div>';showImamMessage()}
+function calcScore(){let c=deeds.filter((_,i)=>document.getElementById("d"+i)?.checked).length;document.getElementById("score").textContent=fa(Math.round(c/deeds.length*100))+"٪"}
+function saveDeeds(){const a=deeds.map((_,i)=>!!document.getElementById("d"+i).checked);localStorage.setItem("deeds",JSON.stringify({date:new Date().toDateString(),a}));document.getElementById("saveMsg").textContent="✓ اعمال امروز ذخیره شد";toast("ثبت شد")}
+function loadDeeds(){try{const x=JSON.parse(localStorage.getItem("deeds"));if(x?.date===new Date().toDateString())x.a.forEach((v,i)=>document.getElementById("d"+i).checked=v);calcScore()}catch{}}
+const surahNames=["الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم", "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر", "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس", "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص", "الفلق", "الناس"];
+let currentSurah=1;
+const quranBase="https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/chapters/";
+function setupQuran(){const s=document.getElementById("surahSelect");s.innerHTML=surahNames.map((n,i)=>`<option value="${i+1}">${fa(i+1)}. ${n}</option>`).join("");s.value=currentSurah;loadSurah(currentSurah)}
+async function loadSurah(n){
+ currentSurah=Number(n);localStorage.setItem("currentSurah",currentSurah);
+ const s=document.getElementById("surahSelect");if(s)s.value=currentSurah;
+ const box=document.getElementById("surahBox"),status=document.getElementById("quranStatus");
+ box.innerHTML="";status.textContent="در حال دریافت سوره "+surahNames[currentSurah-1]+"…";
+ try{
+   const r=await fetch(quranBase+currentSurah+".json"); if(!r.ok) throw new Error("network");
+   const d=await r.json(); const verses=d.verses||d.ayahs||[];
+   status.textContent=surahNames[currentSurah-1]+" • "+fa(verses.length)+" آیه • متن عثمانی";
+   box.innerHTML=verses.map(v=>`<article class="quote"><span class="tag">آیه ${fa(v.verse||v.id||v.ayah||0)}</span><div class="arabic" style="font-size:23px;line-height:2.25">${v.text||v.text_ar||v.arabic||""}</div></article>`).join("");
+ }catch(e){status.innerHTML="اتصال به منبع قرآن برقرار نشد. اینترنت گوشی را بررسی کن و دوباره تلاش کن.<br><button class='btn primary' style='margin-top:10px' onclick='loadSurah("+currentSurah+")'>تلاش دوباره</button>";}
+}
+function nextSurah(){loadSurah(Math.min(114,currentSurah+1));}
+function prevSurah(){loadSurah(Math.max(1,currentSurah-1));}
+function randomSurah(){loadSurah(1+Math.floor(Math.random()*114));}
+function addMsg(t,c){const e=document.createElement("div");e.className="msg "+c;e.textContent=t;document.getElementById("chat").appendChild(e);document.getElementById("chat").scrollTop=99999}
+function answer(q){
+ q=(q||"").toLowerCase().replace(/[؟?!،؛:«»"'"'"'`]/g," ").replace(/\s+/g," ").trim();
+ const normalize=t=>t.toLowerCase().replace(/[؟?!،؛:«»"'"'"'`]/g," ").replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/ۀ/g,"ه").replace(/\s+/g," ").trim();
+ const nq=normalize(q); let best=null,bestScore=0;
+ for(const k in answers){const nk=normalize(k);let score=nq.includes(nk)?100+nk.length:0;for(const w of nk.split(" ").filter(w=>w.length>=3))if(nq.includes(w))score+=Math.min(18,w.length);if(score>bestScore){bestScore=score;best=answers[k][0];}}
+ return bestScore>=20?best:null;
+}
+async function sendQuestion(e){e.preventDefault();const i=document.getElementById("aiInput"),q=i.value.trim();if(!q)return;addMsg(q,"me");i.value="";
+ const offline=answer(q);
+ if(offline){ addMsg(offline,"bot"); return; }
+ const hasApi=!!localStorage.getItem("nn_api_key_v1");
+ if(hasApi&&window.nnAskChatQuestion){addMsg("🟡 مشاور آنلاین در حال بررسی سؤال است…","bot");const r=await window.nnAskChatQuestion(q);const last=document.querySelector("#chat .bot:last-child");if(last&&r)last.textContent=r;return;}
+ addMsg("برای این سؤال هنوز پاسخ آفلاین آماده نشده است. با ثبت API، مشاور آنلاین را فعال کن.","bot");
+}
+// پشتیبان پایدار پاسخ‌های آفلاین: بانک پاسخ‌ها داخل خود برنامه است و وابسته به اینترنت نیست.
+window.addEventListener("error",function(ev){if(ev&&ev.message&&/answer|answers/i.test(ev.message)){try{console.warn("Offline advisor fallback active");}catch(_){}}});
+function askSuggestion(q){document.getElementById("aiInput").value=q;document.querySelector(".chatbox").requestSubmit()}
+const imamMessages=["باز من حواسم به تو هست؛ تو هم حواست به من باشه. 🌿","امروز یک قدم برای بهتر شدن بردار؛ انتظار فقط با حرف نیست.","اگر دلت برای امام زمانت تنگ شده، خودت را به خدا نزدیک‌تر کن.","امروز یک کار خوب انجام بده که اگر امام زمانت می‌دید، از آن خشنود می‌شد.","منتظر واقعی، خودش را برای روز ظهور آماده می‌کند.","یک صلوات بفرست و برای فرج دعا کن؛ حتی اگر امروز فقط چند ثانیه فرصت داری."];
+function showImamMessage(){const e=document.getElementById("imamMessage");if(e)e.textContent=imamMessages[Math.floor(Math.random()*imamMessages.length)];}
+function copyTextBlock(btn){const block=btn.previousElementSibling;const text=block?block.innerText:"";navigator.clipboard?.writeText(text).then(()=>toast("متن کپی شد 🌿"),()=>alert("کپی خودکار در این مرورگر در دسترس نیست."));}
+let z=Number(localStorage.getItem("zikr")||0);function countZikr(){z++;localStorage.setItem("zikr",z);document.getElementById("zikrCount").textContent=fa(z);toast("ذکر ثبت شد 🌿")}
+window.nnRefreshApiStatus=function(){const e=document.getElementById("nnAiStatus"),s=document.getElementById("offlineStatus"),has=!!localStorage.getItem("nn_api_key_v1");if(e)e.textContent=has?"🟢 مشاور آنلاین فعال است":"🟡 حالت آفلاین فعال است";if(s)s.textContent=has?"🟢 آفلاین + آنلاین آماده است":"🟢 مشاور آفلاین آماده است";};
+document.addEventListener("DOMContentLoaded",()=>{if(localStorage.getItem("theme")==="light")document.body.classList.add("light");render();setupQuran();loadDeeds();window.nnRefreshApiStatus?.();document.getElementById("zikrCount").textContent=fa(z);showScreen("home")});
+</script>
+
+<!-- 🔐 قفل تنظیمات نفس نور -->
+
+
+
+<div id="firstUnlockOverlay" class="nn-lock-overlay" style="display:none">
+  <div class="nn-lock-box">
+    <div class="nn-lock-icon">🔐</div>
+    <h2>رمز ورود اولیه</h2>
+    <p id="firstUnlockText">برای اولین ورود یک رمز تعیین کن. بعد از تأیید، دیگر صفحه قفل نمایش داده نمی‌شود.</p>
+    <input id="firstPassword" class="nn-lock-input" type="password" autocomplete="new-password" placeholder="رمز جدید" dir="ltr">
+    <input id="firstPassword2" class="nn-lock-input" type="password" autocomplete="new-password" placeholder="تکرار رمز" dir="ltr">
+    <div id="firstUnlockError" class="nn-lock-error"></div>
+    <button class="nn-lock-btn" onclick="nnCreateOneTimePassword()">ثبت رمز و ورود</button>
+  </div>
+</div>
+
+<div id="cameraOverlay" class="nn-lock-overlay" style="display:none">
+  <div class="nn-lock-box">
+    <div class="nn-lock-icon">📷</div>
+    <h2>هشدار امنیتی</h2>
+    <p>۳ بار رمز اشتباه وارد شده است. اگر می‌خواهی عکس گرفته شود، اجازه دوربین را بده.</p>
+    <video id="securityVideo" autoplay playsinline muted style="width:100%;border-radius:16px;background:#000;margin:10px 0"></video>
+    <canvas id="securityCanvas" style="display:none"></canvas>
+    <button class="nn-lock-btn" onclick="nnTakeSecurityPhoto()">📸 عکس بگیر</button>
+    <button class="nn-lock-cancel" onclick="nnCloseCamera()">انصراف</button>
+  </div>
+</div>
+
+<div id="settingsPanel" class="nn-settings-panel" style="display:none">
+  <div class="nn-settings-box">
+    <button class="nn-settings-close" onclick="nnCloseSettings()">×</button>
+    <div class="nn-lock-icon">⚙️</div>
+    <h2>تنظیمات خصوصی</h2>
+    <p>این بخش با رمز برنامه محافظت می‌شود.</p>
+
+    <label>🔑 کلید API</label>
+    <input id="nnApiKey" class="nn-lock-input" type="password"
+           placeholder="کلید API را اینجا وارد کنید" dir="ltr" autocomplete="off">
+
+    <button class="nn-lock-btn" onclick="nnSaveApiKey()">💾 ذخیره روی همین دستگاه</button>
+    <button class="nn-secondary-btn" onclick="nnChangePassword()">🔐 تغییر رمز</button>
+    <button class="nn-danger-btn" onclick="nnForgetLocalData()">🗑️ پاک کردن اطلاعات محلی</button>
+    
+<label>🤖 مدل</label>
+<input id="nnModel" class="nn-lock-input" type="text" value="gpt-4.1-mini"
+       placeholder="نام مدل API" dir="ltr" autocomplete="off">
+
+<label>🌐 آدرس API</label>
+<input id="nnEndpoint" class="nn-lock-input" type="text"
+       value="https://api.openai.com/v1/responses" dir="ltr" autocomplete="off">
+
+<p class="nn-security-note">🔐 رمز ورود اولیه فقط یک‌بار هنگام راه‌اندازی ثبت می‌شود. برای ورود دوباره به تنظیمات خصوصی، همان رمز لازم است.</p><p class="nn-security-note">نکته: این قفل برای محافظت از دسترسی داخل برنامه است؛ رمز و API Key در یک فایل HTML سمت کاربر، امنیت سروریِ کامل ندارند.</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+<script>
+(function(){
+  const PASS_HASH_KEY="nn_one_time_password_v3";
+  const WRONG_KEY="nn_wrong_attempts_v3";
+  const API_KEY="nn_api_key_v1";
+  const MODEL_KEY="nn_api_model_v1";
+  const ENDPOINT_KEY="nn_api_endpoint_v1";
+  function hashText(text){let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0).toString(16);}
+  function hasPassword(){return !!localStorage.getItem(PASS_HASH_KEY);}
+  function showFirstUnlock(){const e=document.getElementById("firstUnlockOverlay");if(e)e.style.display="flex";}
+  window.nnCreateOneTimePassword=function(){const p=document.getElementById("firstPassword").value,p2=document.getElementById("firstPassword2").value,err=document.getElementById("firstUnlockError");if(p.length<4){err.textContent="رمز باید حداقل ۴ کاراکتر باشد.";return;}if(p!==p2){err.textContent="دو رمز یکسان نیستند.";return;}localStorage.setItem(PASS_HASH_KEY,hashText(p));localStorage.setItem(WRONG_KEY,"0");document.getElementById("firstUnlockOverlay").style.display="none";nnOpenSettingsPanel();};
+  window.nnOpenSettings=function(){if(!hasPassword()){showFirstUnlock();return;}const p=prompt("🔐 رمز تنظیمات خصوصی را وارد کن:");if(p===null)return;if(hashText(p)===localStorage.getItem(PASS_HASH_KEY)){localStorage.setItem(WRONG_KEY,"0");nnOpenSettingsPanel();return;}let n=parseInt(localStorage.getItem(WRONG_KEY)||"0",10)+1;localStorage.setItem(WRONG_KEY,String(n));if(n>=3){localStorage.setItem(WRONG_KEY,"0");alert("سه تلاش ناموفق بود. تنظیمات فعلاً قفل شد؛ دوباره با رمز درست وارد شو.");}else alert("رمز اشتباه است. تلاش باقی‌مانده: "+(3-n));};
+  window.nnOpenSettingsPanel=function(){const p=document.getElementById("settingsPanel");if(!p)return;p.style.display="flex";document.getElementById("nnApiKey").value=localStorage.getItem(API_KEY)||"";document.getElementById("nnModel").value=localStorage.getItem(MODEL_KEY)||"gpt-4.1-mini";document.getElementById("nnEndpoint").value=localStorage.getItem(ENDPOINT_KEY)||"https://api.openai.com/v1/responses";};
+  window.nnCloseSettings=function(){document.getElementById("settingsPanel").style.display="none";};
+  window.nnSaveApiKey=function(){const key=document.getElementById("nnApiKey").value.trim(),model=document.getElementById("nnModel").value.trim()||"gpt-4.1-mini",endpoint=document.getElementById("nnEndpoint").value.trim()||"https://api.openai.com/v1/responses";if(key)localStorage.setItem(API_KEY,key);else localStorage.removeItem(API_KEY);localStorage.setItem(MODEL_KEY,model);localStorage.setItem(ENDPOINT_KEY,endpoint);if(typeof window.nnRefreshApiStatus==="function")window.nnRefreshApiStatus();alert(key?"✅ کلید API ذخیره شد و مشاور آنلاین فعال است.":"مشاور آنلاین خاموش شد و برنامه از حالت آفلاین استفاده می‌کند.");};
+  window.nnChangePassword=function(){const old=prompt("رمز فعلی:");if(old===null||hashText(old)!==localStorage.getItem(PASS_HASH_KEY)){alert("رمز فعلی نادرست است.");return;}const n=prompt("رمز جدید (حداقل ۴ کاراکتر):");if(!n||n.length<4){alert("رمز جدید معتبر نیست.");return;}const n2=prompt("تکرار رمز جدید:");if(n!==n2){alert("دو رمز یکسان نیستند.");return;}localStorage.setItem(PASS_HASH_KEY,hashText(n));alert("رمز تغییر کرد.");};
+  window.nnForgetLocalData=function(){if(confirm("رمز، API و تنظیمات محلی پاک شوند؟")){localStorage.removeItem(PASS_HASH_KEY);localStorage.removeItem(API_KEY);localStorage.removeItem(MODEL_KEY);localStorage.removeItem(ENDPOINT_KEY);localStorage.removeItem(WRONG_KEY);location.reload();}};
+  // رمز اولیه فقط هنگام ورود به تنظیمات نمایش داده می‌شود؛ در بارگذاری برنامه خودکار باز نمی‌شود.
+})();
+</script>
+
+
+<script>
+(function(){
+  const API_KEY="nn_api_key_v1";
+  const MODEL_KEY="nn_api_model_v1";
+  const ENDPOINT_KEY="nn_api_endpoint_v1";
+  const DEFAULT_ENDPOINT="https://api.openai.com/v1/responses";
+  const DEFAULT_MODEL="gpt-4.1-mini";
+
+  window.nnAskSpiritualAI=async function(){
+    const q=(document.getElementById("nnAiQuestion")||{}).value?.trim();
+    const answer=document.getElementById("nnAiAnswer");
+    const status=document.getElementById("nnAiStatus");
+    const key=localStorage.getItem(API_KEY);
+    const model=localStorage.getItem(MODEL_KEY)||DEFAULT_MODEL;
+    const endpoint=localStorage.getItem(ENDPOINT_KEY)||DEFAULT_ENDPOINT;
+
+    if(!q){ answer.textContent="اول سؤال خودت را بنویس."; return; }
+    if(!key){
+      answer.textContent="هنوز API Key ثبت نشده است. ابتدا وارد تنظیمات خصوصی شو و کلید API را ذخیره کن.";
+      status.textContent="🔒 API Key تنظیم نشده";
+      return;
+    }
+
+    status.textContent="🟡 در حال دریافت پاسخ...";
+    answer.textContent="لطفاً چند لحظه صبر کن...";
+    const instructions =
+      "تو «مشاور معنوی نفس نور» هستی. پاسخ‌ها را با احترام به اسلام و مکتب شیعه ارائه کن. " +
+      "در موضوعات اعتقادی و اخلاقی، تا حد امکان بر قرآن، نهج‌البلاغه، احادیث معتبر اهل‌بیت و منابع شناخته‌شده شیعه تکیه کن. " +
+      "اگر سند دقیق را نمی‌دانی، آن را قطعی و به‌عنوان حدیث نقل نکن. برای احکام شرعی پیچیده، پاسخ را حکم قطعی فتوا معرفی نکن و کاربر را به مرجع تقلید یا عالم واجد صلاحیت ارجاع بده. " +
+      "پاسخ را فارسی، روشن، مهربان و کاربردی بنویس و از ادعاهای ساختگی خودداری کن.";
+
+    try{
+      const res=await fetch(endpoint,{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":"Bearer "+key
+        },
+        body:JSON.stringify({
+          model:model,
+          instructions:instructions,
+          input:q
+        })
+      });
+      const data=await res.json();
+      if(!res.ok){
+        throw new Error(data?.error?.message || ("خطای API: "+res.status));
+      }
+
+      let text="";
+      if(typeof data.output_text==="string") text=data.output_text;
+      if(!text && Array.isArray(data.output)){
+        for(const item of data.output){
+          if(Array.isArray(item.content)){
+            for(const c of item.content){
+              if(typeof c.text==="string") text += (text?"\n":"")+c.text;
+            }
+          }
+        }
+      }
+      if(!text) text="پاسخی از API دریافت شد، اما متن پاسخ قابل استخراج نبود.";
+      answer.textContent=text;
+      status.textContent="🟢 آنلاین";
+    }catch(err){
+      status.textContent="🔴 خطا در اتصال";
+      answer.textContent="اتصال برقرار نشد.\n\n"+(err?.message||err);
+    }
+  };
+
+  // Override the existing API save function so model/endpoint are saved too.
+  const oldSave=window.nnSaveApiKey;
+  window.nnSaveApiKey=function(){
+    const key=document.getElementById("nnApiKey")?.value.trim()||"";
+    const model=document.getElementById("nnModel")?.value.trim()||DEFAULT_MODEL;
+    const endpoint=document.getElementById("nnEndpoint")?.value.trim()||DEFAULT_ENDPOINT;
+    if(key) localStorage.setItem(API_KEY,key); else localStorage.removeItem(API_KEY);
+    localStorage.setItem(MODEL_KEY,model);
+    localStorage.setItem(ENDPOINT_KEY,endpoint);
+    alert(key?"تنظیمات اتصال ذخیره شد؛ مشاور آنلاین فعال شد.":"کلید API پاک شد؛ مشاور به حالت آفلاین برگشت.");
+    const st=document.getElementById("offlineStatus"); if(st) st.textContent=key?"🟢 مشاور آنلاین فعال است":"🟢 مشاور آفلاین آماده است";
+  };
+
+  const oldOpen=window.nnOpenSettingsPanel;
+  window.nnOpenSettingsPanel=function(){
+    if(oldOpen) oldOpen();
+    setTimeout(()=>{
+      const m=document.getElementById("nnModel");
+      const e=document.getElementById("nnEndpoint");
+      if(m) m.value=localStorage.getItem(MODEL_KEY)||DEFAULT_MODEL;
+      if(e) e.value=localStorage.getItem(ENDPOINT_KEY)||DEFAULT_ENDPOINT;
+    },0);
+  };
+})();
+
+  window.nnAskChatQuestion=async function(q){
+    const key=localStorage.getItem(API_KEY); if(!key)return "هنوز API Key ثبت نشده است. از تنظیمات خصوصی، کلید API را وارد کن.";
+    const model=localStorage.getItem(MODEL_KEY)||DEFAULT_MODEL; const endpoint=localStorage.getItem(ENDPOINT_KEY)||DEFAULT_ENDPOINT;
+    const instructions="تو مشاور معنوی نَفَسِ نور برای کاربران شیعه هستی. فارسی، محترمانه و روشن پاسخ بده. برای احکام شرعی، پاسخ را فتوا معرفی نکن و مرجع تقلید را ملاک قرار بده. حدیث یا نسبت تاریخی بدون اطمینان قطعی نده. اگر سند دقیق را نمی‌دانی، صادقانه بگو.";
+    try{const res=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+key},body:JSON.stringify({model,instructions,input:q})});const data=await res.json();if(!res.ok)throw new Error(data?.error?.message||("خطای API: "+res.status));let text=data?.output_text||"";if(!text&&Array.isArray(data?.output))for(const item of data.output)if(Array.isArray(item.content))for(const c of item.content)if(typeof c.text==="string")text+=(text?"\n":"")+c.text;return text||"پاسخ متنی از API دریافت نشد.";}catch(err){return "اتصال به مشاور آنلاین برقرار نشد.\n\n"+(err?.message||err)+"\n\nمی‌توانی از پاسخ‌های آفلاین برنامه استفاده کنی.";}
+  };
+</script>
+
+</body></html>
